@@ -29,33 +29,31 @@ public class Audit extends BaseEntity {
     private Integer codigo;
 
     @Reference
-    private User developer;
     private App application;
 
-    private String firstname;
-    private String lastname;
     private String token;
     private Date date;
     private String search;
     private String ip;
 
     public Audit() {
+        this.application = new App();
     }
 
-    public String getFirstname() {
-        return firstname;
+    public Integer getCodigo() {
+        return codigo;
     }
 
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
+    public void setCodigo(Integer codigo) {
+        this.codigo = codigo;
     }
 
-    public String getLastname() {
-        return lastname;
+    public App getApplication() {
+        return application;
     }
 
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
+    public void setApplication(App application) {
+        this.application = application;
     }
 
     public String getToken() {
@@ -89,5 +87,4 @@ public class Audit extends BaseEntity {
     public void setIp(String ip) {
         this.ip = ip;
     }
-
 }

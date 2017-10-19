@@ -28,6 +28,9 @@ public class User extends BaseEntity {
     private Integer codigo;
 
     @Embedded
+    private Local local;
+
+    @Embedded
     private Facebook facebook;
 
     @Embedded
@@ -40,6 +43,7 @@ public class User extends BaseEntity {
     private Integer flag;
 
     public User() {
+        this.local = new Local();
         this.facebook = new Facebook();
         this.twitter = new Twitter();
         this.google = new Google();
