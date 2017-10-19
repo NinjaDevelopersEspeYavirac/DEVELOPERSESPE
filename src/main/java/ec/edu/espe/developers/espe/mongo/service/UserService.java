@@ -30,7 +30,7 @@ public class UserService implements Serializable {
         Boolean exito = Boolean.FALSE;
         User axu = this.findByCodigo(user);
         if (axu.getId() == null) {
-            user.setCodigo(this.obtenerCodigo());
+            user.setCodigo(this.count());
             user.setFlag(1);
             this.ds.save(user);
             exito = Boolean.TRUE;
@@ -38,14 +38,11 @@ public class UserService implements Serializable {
         return exito;
     }
 
-    private Integer obtenerCodigo() {
-        List<User> users = this.ds.find(User.class).asList();
-        if (users == null) {
-            users = new ArrayList<>();
-        }
-        Integer size = users.size();
-        Integer number = 1000 + 1 * size;
-        return number;
+    private Integer count() {
+        Integer count = 0;
+        Long result = this.ds.find(User.class).count();
+        count = new Integer(result.intValue());
+        return count + 1 * 10;
     }
 
     public User findByCodigo(User user) {
@@ -69,7 +66,8 @@ public class UserService implements Serializable {
         }
         return find;
     }
-      public User findById(User user) {
+
+    public User findById(User user) {
         User find = new User();
         Query<User> result = this.ds.find(User.class).
                 field("id").equal(user.getId()).
@@ -103,8 +101,7 @@ public class UserService implements Serializable {
         return results.getUpdatedExisting();
     }
 
-
-       public Boolean update(User user) {
+    public Boolean update(User user) {
         Query<User> query = this.ds.createQuery(User.class);
         query.and(
                 query.criteria("codigo").equal(user.getCodigo())
@@ -119,5 +116,5 @@ public class UserService implements Serializable {
         UpdateResults results = this.ds.update(query, update);
         return results.getUpdatedExisting();
     }
-    
+
 }
