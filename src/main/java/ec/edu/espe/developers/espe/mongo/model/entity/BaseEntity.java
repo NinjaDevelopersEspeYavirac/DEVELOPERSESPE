@@ -18,7 +18,7 @@ import org.mongodb.morphia.annotations.Version;
 public abstract class BaseEntity {
  
     @Id
-    @Property("id")
+    @Property("_id")
     protected ObjectId id;
  
     @Version
