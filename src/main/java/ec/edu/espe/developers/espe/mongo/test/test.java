@@ -21,13 +21,10 @@ public class test {
     public static void main(String[] args) {
 
         UserService service = new UserService();
-        for (int i = 0; i < 10000000; i++) {
+        for (int i = 0; i < 333333; i++) {
             User test = new User();
             test.getLocal().setId("L00" + RandomStringUtils.randomNumeric(6));
-            test.getLocal().setName(RandomStringUtils.randomAlphabetic(4) + " "
-                    + RandomStringUtils.randomAlphabetic(4) + " "
-                    + RandomStringUtils.randomAlphabetic(6) + " "
-                    + RandomStringUtils.randomAlphabetic(5));
+            test.getLocal().setName("1804110474");
             test.getLocal().setPassword(RandomStringUtils.randomAlphanumeric(32));
             test.setAdmin(Boolean.TRUE);
 
