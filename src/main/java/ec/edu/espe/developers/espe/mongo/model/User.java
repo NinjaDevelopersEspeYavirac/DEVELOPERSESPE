@@ -11,7 +11,6 @@ import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Field;
 import org.mongodb.morphia.annotations.Index;
 import org.mongodb.morphia.annotations.IndexOptions;
-import org.mongodb.morphia.annotations.Indexed;
 import org.mongodb.morphia.annotations.Indexes;
 
 /**
@@ -24,7 +23,7 @@ import org.mongodb.morphia.annotations.Indexes;
     @Index(fields = @Field("flag"))})
 public class User extends BaseEntity {
 
-    private Integer codigo;
+    private String codigo;
 
     @Embedded
     private Local local;
@@ -50,11 +49,11 @@ public class User extends BaseEntity {
         this.flag = 0;
     }
 
-    public Integer getCodigo() {
+    public String getCodigo() {
         return codigo;
     }
 
-    public void setCodigo(Integer codigo) {
+    public void setCodigo(String codigo) {
         this.codigo = codigo;
     }
 

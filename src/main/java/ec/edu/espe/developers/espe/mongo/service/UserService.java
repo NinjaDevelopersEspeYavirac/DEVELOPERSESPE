@@ -8,8 +8,7 @@ package ec.edu.espe.developers.espe.mongo.service;
 import ec.edu.espe.developers.espe.mongo.model.User;
 import ec.edu.espe.developers.espe.mongo.util.MongoPersistence;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.query.Query;
 import org.mongodb.morphia.query.UpdateOperations;
@@ -30,7 +29,7 @@ public class UserService implements Serializable {
         Boolean exito = Boolean.FALSE;
         User axu = this.findByCodigo(user);
         if (axu.getId() == null) {
-            user.setCodigo(this.count());
+            user.setCodigo("USER" + this.count() + RandomStringUtils.randomAlphabetic(6).toUpperCase());
             user.setFlag(1);
             this.ds.save(user);
             exito = Boolean.TRUE;

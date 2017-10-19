@@ -23,7 +23,7 @@ import org.mongodb.morphia.annotations.Reference;
     @Index(fields = @Field("flag"))})
 public class App extends BaseEntity {
 
-    private Integer codigo;
+    private String codigo;
 
     @Reference
     private User developer;
@@ -36,6 +36,22 @@ public class App extends BaseEntity {
 
     public App() {
         this.flag = 0;
+    }
+
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
+    }
+
+    public User getDeveloper() {
+        return developer;
+    }
+
+    public void setDeveloper(User developer) {
+        this.developer = developer;
     }
 
     public String getName() {
@@ -77,21 +93,4 @@ public class App extends BaseEntity {
     public void setFlag(Integer flag) {
         this.flag = flag;
     }
-
-    public Integer getCodigo() {
-        return codigo;
-    }
-
-    public void setCodigo(Integer codigo) {
-        this.codigo = codigo;
-    }
-
-    public User getDeveloper() {
-        return developer;
-    }
-
-    public void setDeveloper(User developer) {
-        this.developer = developer;
-    }
-
 }

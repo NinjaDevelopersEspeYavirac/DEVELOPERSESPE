@@ -31,7 +31,7 @@ public class AppService implements Serializable {
         Boolean exito = Boolean.FALSE;
         App axu = this.findByCodigo(app);
         if (axu.getId() == null) {
-            app.setCodigo(this.obtenerCodigo());
+            //app.setCodigo(this.obtenerCodigo());
             app.setFlag(1);
             this.ds.save(app);
             exito = Boolean.TRUE;

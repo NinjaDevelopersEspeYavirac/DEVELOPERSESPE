@@ -31,7 +31,7 @@ public class TokenService implements Serializable{
         Boolean exito = Boolean.FALSE;
         Token axu = this.findByCodigo(token);
         if (axu.getId() == null) {
-            token.setCodigo(this.obtenerCodigo());
+         //   token.setCodigo(this.obtenerCodigo());
             token.setFlag(1);
             this.ds.save(token);
             exito = Boolean.TRUE;

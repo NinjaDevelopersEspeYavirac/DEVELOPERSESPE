@@ -33,7 +33,7 @@ public class AuditService implements Serializable{
         Boolean exito = Boolean.FALSE;
         Audit axu = this.findByCodigo(audit);
         if (axu.getId() == null) {
-            audit.setCodigo(this.obtenerCodigo());
+           // audit.setCodigo(this.obtenerCodigo());
             audit.setFlag(1);
             this.ds.save(audit);
             exito = Boolean.TRUE;

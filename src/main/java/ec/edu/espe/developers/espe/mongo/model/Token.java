@@ -24,7 +24,7 @@ import org.mongodb.morphia.annotations.Reference;
     @Index(fields = @Field("flag"))})
 public class Token extends BaseEntity {
 
-    private Integer codigo;
+    private String codigo;
 
     @Reference
     private App application;
@@ -72,11 +72,11 @@ public class Token extends BaseEntity {
         this.forever = forever;
     }
 
-    public Integer getCodigo() {
+    public String getCodigo() {
         return codigo;
     }
 
-    public void setCodigo(Integer codigo) {
+    public void setCodigo(String codigo) {
         this.codigo = codigo;
     }
 

@@ -11,7 +11,6 @@ import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Field;
 import org.mongodb.morphia.annotations.Index;
 import org.mongodb.morphia.annotations.IndexOptions;
-import org.mongodb.morphia.annotations.Indexed;
 import org.mongodb.morphia.annotations.Indexes;
 import org.mongodb.morphia.annotations.Reference;
 
@@ -25,8 +24,7 @@ import org.mongodb.morphia.annotations.Reference;
     @Index(fields = @Field("flag"))})
 public class Audit extends BaseEntity {
 
-    @Indexed(options = @IndexOptions(unique = true))
-    private Integer codigo;
+    private String codigo;
 
     @Reference
     private App application;
@@ -37,25 +35,15 @@ public class Audit extends BaseEntity {
     private String ip;
     private Integer flag;
 
-    public Integer getFlag() {
-        return flag;
-    }
-
-    public void setFlag(Integer flag) {
-        this.flag = flag;
-    }
-    
-    
-
-    public Audit() {
+      public Audit() {
         this.application = new App();
     }
 
-    public Integer getCodigo() {
+    public String getCodigo() {
         return codigo;
     }
 
-    public void setCodigo(Integer codigo) {
+    public void setCodigo(String codigo) {
         this.codigo = codigo;
     }
 
@@ -98,4 +86,13 @@ public class Audit extends BaseEntity {
     public void setIp(String ip) {
         this.ip = ip;
     }
+
+    public Integer getFlag() {
+        return flag;
+    }
+
+    public void setFlag(Integer flag) {
+        this.flag = flag;
+    }
+   
 }

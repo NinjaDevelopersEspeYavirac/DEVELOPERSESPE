@@ -7,10 +7,7 @@ package ec.edu.espe.developers.espe.mongo.util;
 
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
-import com.mongodb.MongoCredential;
-import com.mongodb.ServerAddress;
 import com.mongodb.WriteConcern;
-import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.mongodb.morphia.Datastore;
