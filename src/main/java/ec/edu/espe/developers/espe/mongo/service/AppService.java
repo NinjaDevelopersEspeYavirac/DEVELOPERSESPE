@@ -31,7 +31,7 @@ public class AppService implements Serializable {
         Boolean exito = Boolean.FALSE;
         App axu = this.findByCodigo(app);
         if (axu.getId() == null) {
-            app.setCodigoApp(this.obtenerCodigo());
+            app.setCodigo(this.obtenerCodigo());
             app.setFlag(1);
             this.ds.save(app);
             exito = Boolean.TRUE;
@@ -51,7 +51,7 @@ public class AppService implements Serializable {
     public App findByCodigo(App app) {
         App find = new App();
         Query<App> result = this.ds.find(App.class).
-                field("codigo").equal(app.getCodigoApp()).
+                field("codigo").equal(app.getCodigo()).
                 field("flag").equal(1);
         if (result.asList() != null && !result.asList().isEmpty()) {
             find = result.asList().get(0);
@@ -96,7 +96,7 @@ public class AppService implements Serializable {
         Query<App> query = this.ds.createQuery(App.class);
         app.setFlag(0);
         query.and(
-                query.criteria("codigo").equal(app.getCodigoApp())
+                query.criteria("codigo").equal(app.getCodigo())
         );
         UpdateOperations<App> update = this.ds.createUpdateOperations(App.class);
         update.set("flag", app.getFlag());
@@ -107,7 +107,7 @@ public class AppService implements Serializable {
     public Boolean update(App app) {
         Query<App> query = this.ds.createQuery(App.class);
         query.and(
-                query.criteria("codigo").equal(app.getCodigoApp())
+                query.criteria("codigo").equal(app.getCodigo())
         );
         UpdateOperations<App> update = this.ds.createUpdateOperations(App.class);
         update.set("name", app.getName()).

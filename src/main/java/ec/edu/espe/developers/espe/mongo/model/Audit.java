@@ -21,12 +21,12 @@ import org.mongodb.morphia.annotations.Reference;
  */
 @Entity(value = "Audit")
 @Indexes({
-    @Index(fields = @Field("codigoAudit")),
+    @Index(fields = @Field("codigo"), options = @IndexOptions(unique = true)),
     @Index(fields = @Field("flag"))})
 public class Audit extends BaseEntity {
 
     @Indexed(options = @IndexOptions(unique = true))
-    private Integer codigoAudit;
+    private Integer codigo;
 
     @Reference
     private App application;
@@ -51,12 +51,12 @@ public class Audit extends BaseEntity {
         this.application = new App();
     }
 
-    public Integer getCodigoAudit() {
-        return codigoAudit;
+    public Integer getCodigo() {
+        return codigo;
     }
 
-    public void setCodigoAudit(Integer codigoAudit) {
-        this.codigoAudit = codigoAudit;
+    public void setCodigo(Integer codigo) {
+        this.codigo = codigo;
     }
 
     public App getApplication() {

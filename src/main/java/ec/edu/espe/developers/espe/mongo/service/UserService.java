@@ -30,7 +30,7 @@ public class UserService implements Serializable {
         Boolean exito = Boolean.FALSE;
         User axu = this.findByCodigo(user);
         if (axu.getId() == null) {
-            user.setCodigoUser(this.obtenerCodigo());
+            user.setCodigo(this.obtenerCodigo());
             user.setFlag(1);
             this.ds.save(user);
             exito = Boolean.TRUE;
@@ -51,7 +51,7 @@ public class UserService implements Serializable {
     public User findByCodigo(User user) {
         User find = new User();
         Query<User> result = this.ds.find(User.class).
-                field("codigo").equal(user.getCodigoUser()).
+                field("codigo").equal(user.getCodigo()).
                 field("flag").equal(1);
         if (result.asList() != null && !result.asList().isEmpty()) {
             find = result.asList().get(0);
@@ -95,7 +95,7 @@ public class UserService implements Serializable {
         Query<User> query = this.ds.createQuery(User.class);
         user.setFlag(0);
         query.and(
-                query.criteria("codigo").equal(user.getCodigoUser())
+                query.criteria("codigo").equal(user.getCodigo())
         );
         UpdateOperations<User> update = this.ds.createUpdateOperations(User.class);
         update.set("flag", user.getFlag());
@@ -107,7 +107,7 @@ public class UserService implements Serializable {
        public Boolean update(User user) {
         Query<User> query = this.ds.createQuery(User.class);
         query.and(
-                query.criteria("codigo").equal(user.getCodigoUser())
+                query.criteria("codigo").equal(user.getCodigo())
         );
         UpdateOperations<User> update = this.ds.createUpdateOperations(User.class);
         update.set("Facebook", user.getFacebook()).

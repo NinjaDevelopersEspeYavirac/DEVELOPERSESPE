@@ -10,7 +10,6 @@ import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Field;
 import org.mongodb.morphia.annotations.Index;
 import org.mongodb.morphia.annotations.IndexOptions;
-import org.mongodb.morphia.annotations.Indexed;
 import org.mongodb.morphia.annotations.Indexes;
 import org.mongodb.morphia.annotations.Reference;
 
@@ -20,12 +19,11 @@ import org.mongodb.morphia.annotations.Reference;
  */
 @Entity(value = "App")
 @Indexes({
-    @Index(fields = @Field("codigoApp")),
+    @Index(fields = @Field("codigo"), options = @IndexOptions(unique = true)),
     @Index(fields = @Field("flag"))})
 public class App extends BaseEntity {
 
-    @Indexed(options = @IndexOptions(unique = true))
-    private Integer codigoApp;
+    private Integer codigo;
 
     @Reference
     private User developer;
@@ -80,12 +78,12 @@ public class App extends BaseEntity {
         this.flag = flag;
     }
 
-    public Integer getCodigoApp() {
-        return codigoApp;
+    public Integer getCodigo() {
+        return codigo;
     }
 
-    public void setCodigoApp(Integer codigoApp) {
-        this.codigoApp = codigoApp;
+    public void setCodigo(Integer codigo) {
+        this.codigo = codigo;
     }
 
     public User getDeveloper() {
@@ -95,5 +93,5 @@ public class App extends BaseEntity {
     public void setDeveloper(User developer) {
         this.developer = developer;
     }
-    
+
 }
