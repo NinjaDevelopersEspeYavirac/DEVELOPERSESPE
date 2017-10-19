@@ -24,6 +24,7 @@ public class AppService implements Serializable {
     private static final long serialVersionUID = 563549719444755084L;
 
     private MongoPersistence conn = new MongoPersistence();
+    
     private Datastore ds = conn.context();
 
     public Boolean insert(App app) {
