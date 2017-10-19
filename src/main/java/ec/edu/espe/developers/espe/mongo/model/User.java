@@ -20,12 +20,12 @@ import org.mongodb.morphia.annotations.Indexes;
  */
 @Entity(value = "User")
 @Indexes({
-    @Index(fields = @Field("codigo")),
+    @Index(fields = @Field("codigoUser")),
     @Index(fields = @Field("flag"))})
 public class User extends BaseEntity {
 
     @Indexed(options = @IndexOptions(unique = true))
-    private Integer codigo;
+    private Integer codigoUser;
 
     @Embedded
     private Local local;
@@ -51,12 +51,12 @@ public class User extends BaseEntity {
         this.flag = 0;
     }
 
-    public Integer getCodigo() {
-        return codigo;
+    public Integer getCodigoUser() {
+        return codigoUser;
     }
 
-    public void setCodigo(Integer codigo) {
-        this.codigo = codigo;
+    public void setCodigoUser(Integer codigoUser) {
+        this.codigoUser = codigoUser;
     }
 
     public Local getLocal() {

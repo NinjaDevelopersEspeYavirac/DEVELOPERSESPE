@@ -21,12 +21,12 @@ import org.mongodb.morphia.annotations.Reference;
  */
 @Entity(value = "Token")
 @Indexes({
-    @Index(fields = @Field("codigo")),
+    @Index(fields = @Field("codigoToken")),
     @Index(fields = @Field("flag"))})
 public class Token extends BaseEntity {
 
     @Indexed(options = @IndexOptions(unique = true))
-    private Integer codigo;
+    private Integer codigoToken;
 
     @Reference
     private App application;
@@ -74,12 +74,12 @@ public class Token extends BaseEntity {
         this.forever = forever;
     }
 
-    public Integer getCodigo() {
-        return codigo;
+    public Integer getCodigoToken() {
+        return codigoToken;
     }
 
-    public void setCodigo(Integer codigo) {
-        this.codigo = codigo;
+    public void setCodigoToken(Integer codigoToken) {
+        this.codigoToken = codigoToken;
     }
 
     public App getApplication() {

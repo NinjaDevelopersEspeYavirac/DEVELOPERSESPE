@@ -33,7 +33,7 @@ public class AuditService implements Serializable{
         Boolean exito = Boolean.FALSE;
         Audit axu = this.findByCodigo(audit);
         if (axu.getId() == null) {
-            audit.setCodigo(this.obtenerCodigo());
+            audit.setCodigoAudit(this.obtenerCodigo());
             audit.setFlag(1);
             this.ds.save(audit);
             exito = Boolean.TRUE;
@@ -53,7 +53,7 @@ public class AuditService implements Serializable{
     public Audit findByCodigo(Audit audit) {
         Audit find = new Audit();
         Query<Audit> result = this.ds.find(Audit.class).
-                field("codigo").equal(audit.getCodigo()).
+                field("codigo").equal(audit.getCodigoAudit()).
                 field("flag").equal(1);
         if (result.asList() != null && !result.asList().isEmpty()) {
             find = result.asList().get(0);
@@ -98,7 +98,7 @@ public class AuditService implements Serializable{
         Query<Audit> query = this.ds.createQuery(Audit.class);
         audit.setFlag(0);
         query.and(
-                query.criteria("codigo").equal(audit.getCodigo())
+                query.criteria("codigo").equal(audit.getCodigoAudit())
         );
         UpdateOperations<Audit> update = this.ds.createUpdateOperations(Audit.class);
         update.set("flag", audit.getFlag());
@@ -109,7 +109,7 @@ public class AuditService implements Serializable{
     public Boolean update(Audit audit) {
         Query<Audit> query = this.ds.createQuery(Audit.class);
         query.and(
-                query.criteria("codigo").equal(audit.getCodigo())
+                query.criteria("codigo").equal(audit.getCodigoAudit())
         );
         UpdateOperations<Audit> update = this.ds.createUpdateOperations(Audit.class);
         update.set("Token", audit.getToken()).

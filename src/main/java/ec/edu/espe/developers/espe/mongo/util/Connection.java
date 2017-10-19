@@ -6,7 +6,7 @@
 package ec.edu.espe.developers.espe.mongo.util;
 
 import com.mongodb.MongoClient;
-import com.mongodb.MongoClientOptions;
+import com.mongodb.MongoClientURI;
 import com.mongodb.MongoCredential;
 import com.mongodb.ServerAddress;
 import com.mongodb.WriteConcern;
@@ -32,15 +32,9 @@ public class Connection {
         this.config = reader.getConfiguration();
         if (this.config != null) {
             MongoClient mongoClient;
-            MongoClientOptions mongoOptions = MongoClientOptions.builder().socketTimeout(this.config.getSocketTimeout().intValue()).connectTimeout(this.config.getConnectionTimeout().intValue()).build();
             try {
-                String user = "developers.2017";
-                String database = "developersEspe";
-                char[] password = {'E', 's', 'p', 'e', '.', '2', '0', '1', '7'};
-                MongoCredential credential = MongoCredential.createCredential(user, database, password);
-                mongoClient = new MongoClient(new ServerAddress(this.config.getHost(), this.config.getPort().intValue()),
-                        Arrays.asList(credential),
-                        mongoOptions);
+                MongoClientURI uri = new MongoClientURI("mongodb://developers.2017:Espe.2017@10.1.0.93:27017/developersEspe?authSource=admin");
+                mongoClient = new MongoClient(uri);
             } catch (Exception e) {
                 throw new RuntimeException("Error initializing MongoDB", e);
             }

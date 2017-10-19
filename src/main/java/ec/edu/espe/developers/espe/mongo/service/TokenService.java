@@ -31,7 +31,7 @@ public class TokenService implements Serializable{
         Boolean exito = Boolean.FALSE;
         Token axu = this.findByCodigo(token);
         if (axu.getId() == null) {
-            token.setCodigo(this.obtenerCodigo());
+            token.setCodigoToken(this.obtenerCodigo());
             token.setFlag(1);
             this.ds.save(token);
             exito = Boolean.TRUE;
@@ -51,7 +51,7 @@ public class TokenService implements Serializable{
     public Token findByCodigo(Token token) {
         Token find = new Token();
         Query<Token> result = this.ds.find(Token.class).
-                field("codigo").equal(token.getCodigo()).
+                field("codigo").equal(token.getCodigoToken()).
                 field("flag").equal(1);
         if (result.asList() != null && !result.asList().isEmpty()) {
             find = result.asList().get(0);
@@ -96,7 +96,7 @@ public class TokenService implements Serializable{
         Query<Token> query = this.ds.createQuery(Token.class);
         token.setFlag(0);
         query.and(
-                query.criteria("codigo").equal(token.getCodigo())
+                query.criteria("codigo").equal(token.getCodigoToken())
         );
         UpdateOperations<Token> update = this.ds.createUpdateOperations(Token.class);
         update.set("flag", token.getFlag());
@@ -107,7 +107,7 @@ public class TokenService implements Serializable{
     public Boolean update(Token token) {
         Query<Token> query = this.ds.createQuery(Token.class);
         query.and(
-                query.criteria("codigo").equal(token.getCodigo())
+                query.criteria("codigo").equal(token.getCodigoToken())
         );
         UpdateOperations<Token> update = this.ds.createUpdateOperations(Token.class);
         update.set("Hash", token.getHash()).
