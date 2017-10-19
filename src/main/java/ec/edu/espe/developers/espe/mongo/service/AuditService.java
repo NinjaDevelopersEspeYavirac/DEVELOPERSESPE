@@ -115,7 +115,7 @@ public class AuditService implements Serializable{
         update.set("Token", audit.getToken()).
                 set("Date", audit.getDate()).
                 set("Search", audit.getSearch()).
-                set("Ip", audit.getId()).
+                set("Ip", audit.getIp()).
                 set("Flag", audit.getFlag()).
                 set("last_change", audit.getLastChange());
         UpdateResults results = this.ds.update(query, update);
