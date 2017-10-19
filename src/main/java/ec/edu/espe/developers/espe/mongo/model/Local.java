@@ -14,27 +14,32 @@ import org.mongodb.morphia.annotations.Embedded;
 @Embedded
 public class Local {
 
-    private String Id;
-    private String Nombre;
+    private String id;
+    private String name;
     private String password;
 
     public Local() {
+        this.id = "";
+        this.name = "";
+        this.password = "";
     }
-    
+
     public String getId() {
-        return Id;
+        return id;
     }
 
-    public void setId(String Id) {
-        this.Id = Id;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public String getNombre() {
-        return Nombre;
+
+
+    public String getName() {
+        return name;
     }
 
-    public void setNombre(String Nombre) {
-        this.Nombre = Nombre;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getPassword() {

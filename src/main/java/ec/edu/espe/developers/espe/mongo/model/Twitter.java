@@ -13,13 +13,19 @@ import org.mongodb.morphia.annotations.Embedded;
  */
 @Embedded
 public class Twitter {
-     private String id;
+
+    private String id;
     private String token;
     private String email;
     private String displayname;
     private String username;
 
     public Twitter() {
+        this.id = "";
+        this.token = "";
+        this.email = "";
+        this.displayname = "";
+        this.username = "";
     }
 
     public String getId() {
@@ -61,6 +67,5 @@ public class Twitter {
     public void setUsername(String username) {
         this.username = username;
     }
-    
-    
+
 }

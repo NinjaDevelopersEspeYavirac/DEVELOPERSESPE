@@ -20,6 +20,10 @@ public class Facebook {
     private String name;
 
     public Facebook() {
+        this.id = "";
+        this.token = "";
+        this.email = "";
+        this.name = "";
     }
 
     public String getId() {

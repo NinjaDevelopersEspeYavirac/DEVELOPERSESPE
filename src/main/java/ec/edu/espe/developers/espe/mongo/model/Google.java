@@ -13,13 +13,17 @@ import org.mongodb.morphia.annotations.Embedded;
  */
 @Embedded
 public class Google {
-    
+
     private String id;
     private String token;
     private String email;
     private String name;
 
     public Google() {
+        this.id = "";
+        this.token = "";
+        this.email = "";
+        this.name = "";
     }
 
     public String getId() {
@@ -53,5 +57,5 @@ public class Google {
     public void setName(String name) {
         this.name = name;
     }
-    
+
 }
