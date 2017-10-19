@@ -59,6 +59,14 @@ public class User extends BaseEntity {
         this.codigo = codigo;
     }
 
+    public Local getLocal() {
+        return local;
+    }
+
+    public void setLocal(Local local) {
+        this.local = local;
+    }
+
     public Facebook getFacebook() {
         return facebook;
     }
