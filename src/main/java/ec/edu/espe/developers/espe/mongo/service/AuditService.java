@@ -8,8 +8,6 @@ package ec.edu.espe.developers.espe.mongo.service;
 import ec.edu.espe.developers.espe.mongo.model.Audit;
 import ec.edu.espe.developers.espe.mongo.util.MongoPersistence;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.query.Query;
