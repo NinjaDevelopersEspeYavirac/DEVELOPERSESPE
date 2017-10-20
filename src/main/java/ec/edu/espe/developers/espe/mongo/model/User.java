@@ -47,6 +47,7 @@ public class User extends BaseEntity {
         this.google = new Google();
         this.admin = Boolean.FALSE;
         this.flag = 0;
+       
     }
 
     public String getCodigo() {

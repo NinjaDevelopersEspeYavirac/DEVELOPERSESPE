@@ -55,7 +55,7 @@ public class UserService implements Serializable {
         return find;
     }
 
-    public User findByCodigo(Integer user) {
+    public User findByCodigo(String user) {
         User find = new User();
         Query<User> result = this.ds.find(User.class).
                 field("codigo").equal(user).
