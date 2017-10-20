@@ -17,7 +17,7 @@ import org.mongodb.morphia.annotations.Indexes;
  *
  * @author luis
  */
-@Entity(value = "User")
+@Entity(value = "users")
 @Indexes({
     @Index(fields = @Field("codigo"), options = @IndexOptions(unique = true)),
     @Index(fields = @Field("flag"))})
