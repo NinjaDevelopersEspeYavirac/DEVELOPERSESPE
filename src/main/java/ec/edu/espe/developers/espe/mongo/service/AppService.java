@@ -55,7 +55,7 @@ public class AppService implements Serializable {
         return find;
     }
 
-    public App findByCodigo(Integer app) {
+    public App findByCodigo(String app) {
         App find = new App();
         Query<App> result = this.ds.find(App.class).
                 field("codigo").equal(app).

@@ -10,6 +10,7 @@ import ec.edu.espe.developers.espe.mongo.util.MongoPersistence;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.query.Query;
 import org.mongodb.morphia.query.UpdateOperations;
@@ -31,24 +32,21 @@ public class AuditService implements Serializable{
     
     public Boolean insert(Audit audit) {
         Boolean exito = Boolean.FALSE;
-        Audit axu = this.findByCodigo(audit);
-        if (axu.getId() == null) {
-           // audit.setCodigo(this.obtenerCodigo());
+        if (audit != null) {
+            audit.setCodigo("APP" + this.count() + RandomStringUtils.randomAlphabetic(6).toUpperCase());
             audit.setFlag(1);
             this.ds.save(audit);
             exito = Boolean.TRUE;
         }
         return exito;
     }
-       private Integer obtenerCodigo() {
-        List<Audit> audits = this.ds.find(Audit.class).asList();
-        if (audits == null) {
-            audits = new ArrayList<>();
-        }
-        Integer size = audits.size();
-        Integer number = 1000 + 1 * size;
-        return number;
+          private Integer count() {
+        Integer count = 0;
+        Long result = this.ds.find(Audit.class).count();
+        count = new Integer(result.intValue());
+        return count + 1 * 10;
     }
+
 
     public Audit findByCodigo(Audit audit) {
         Audit find = new Audit();
@@ -61,7 +59,7 @@ public class AuditService implements Serializable{
         return find;
     }
 
-    public Audit findByCodigo(Integer audit) {
+    public Audit findByCodigo(String audit) {
         Audit find = new Audit();
         Query<Audit> result = this.ds.find(Audit.class).
                 field("codigo").equal(audit).
