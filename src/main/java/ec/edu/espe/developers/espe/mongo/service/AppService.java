@@ -6,11 +6,8 @@
 package ec.edu.espe.developers.espe.mongo.service;
 
 import ec.edu.espe.developers.espe.mongo.model.App;
-import ec.edu.espe.developers.espe.mongo.model.User;
 import ec.edu.espe.developers.espe.mongo.util.MongoPersistence;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.query.Query;
@@ -31,7 +28,7 @@ public class AppService implements Serializable {
 
     public Boolean insert(App app) {
         Boolean exito = Boolean.FALSE;
-        if (app == null) {
+        if (app != null) {
             app.setCodigo("APP" + this.count() + RandomStringUtils.randomAlphabetic(6).toUpperCase());
             app.setFlag(1);
             this.ds.save(app);
