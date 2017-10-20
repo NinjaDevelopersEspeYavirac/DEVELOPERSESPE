@@ -38,6 +38,7 @@ public class User extends BaseEntity {
     private Google google;
 
     private Boolean admin;
+    
     private Integer flag;
 
     public User() {

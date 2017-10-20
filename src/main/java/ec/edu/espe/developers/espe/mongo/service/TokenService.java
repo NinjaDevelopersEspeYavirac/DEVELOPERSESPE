@@ -8,8 +8,7 @@ package ec.edu.espe.developers.espe.mongo.service;
 import ec.edu.espe.developers.espe.mongo.model.Token;
 import ec.edu.espe.developers.espe.mongo.util.MongoPersistence;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.query.Query;
 import org.mongodb.morphia.query.UpdateOperations;
@@ -29,23 +28,20 @@ public class TokenService implements Serializable{
     
     public Boolean insert(Token token) {
         Boolean exito = Boolean.FALSE;
-        Token axu = this.findByCodigo(token);
-        if (axu.getId() == null) {
-         //   token.setCodigo(this.obtenerCodigo());
+        if (token != null) {
+            token.setCodigo("TOKEN" + this.count() + RandomStringUtils.randomAlphabetic(6).toUpperCase());
             token.setFlag(1);
             this.ds.save(token);
             exito = Boolean.TRUE;
         }
         return exito;
     }
-       private Integer obtenerCodigo() {
-        List<Token> tokens = this.ds.find(Token.class).asList();
-        if (tokens == null) {
-            tokens = new ArrayList<>();
-        }
-        Integer size = tokens.size();
-        Integer number = 1000 + 1 * size;
-        return number;
+        
+    private Integer count() {
+        Integer count = 0;
+        Long result = this.ds.find(Token.class).count();
+        count = new Integer(result.intValue());
+        return count + 1 * 10;
     }
 
     public Token findByCodigo(Token token) {
@@ -59,7 +55,7 @@ public class TokenService implements Serializable{
         return find;
     }
 
-    public Token findByCodigo(Integer token) {
+    public Token findByCodigo(String token) {
         Token find = new Token();
         Query<Token> result = this.ds.find(Token.class).
                 field("codigo").equal(token).

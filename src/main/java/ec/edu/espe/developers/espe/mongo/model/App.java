@@ -93,4 +93,6 @@ public class App extends BaseEntity {
     public void setFlag(Integer flag) {
         this.flag = flag;
     }
+
+    
 }
