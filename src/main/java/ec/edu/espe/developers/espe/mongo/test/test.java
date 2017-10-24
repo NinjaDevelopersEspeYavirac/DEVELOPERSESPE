@@ -21,7 +21,7 @@ public class test {
     public static void main(String[] args) {
 
         UserService service = new UserService();
-        for (int i = 0; i < 333333; i++) {
+        for (int i = 0; i < 500; i++) {
             User test = new User();
             test.getLocal().setId("L00" + RandomStringUtils.randomNumeric(6));
             test.getLocal().setName("1804110474");

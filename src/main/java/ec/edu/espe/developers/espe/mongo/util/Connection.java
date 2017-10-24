@@ -32,7 +32,7 @@ public class Connection {
             try {
                 //mongodb://localhost:27017/api-rest-key
                 //MongoClientURI uri = new MongoClientURI("mongodb://developers.2017:Espe.2017@10.1.0.93:27017/developersEspe?authSource=admin");
-                MongoClientURI uri = new MongoClientURI("mongodb://localhost:27017/api-rest-key");
+                MongoClientURI uri = new MongoClientURI("mongodb://localhost:27017/developersEspe");
                 mongoClient = new MongoClient(uri);
             } catch (Exception e) {
                 throw new RuntimeException("Error initializing MongoDB", e);
