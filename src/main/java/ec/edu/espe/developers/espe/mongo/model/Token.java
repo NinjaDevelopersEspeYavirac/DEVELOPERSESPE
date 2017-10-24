@@ -7,6 +7,7 @@ package ec.edu.espe.developers.espe.mongo.model;
 
 import ec.edu.espe.developers.espe.mongo.model.entity.BaseEntity;
 import java.util.Date;
+import java.util.Objects;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Field;
 import org.mongodb.morphia.annotations.Index;
@@ -94,6 +95,60 @@ public class Token extends BaseEntity {
 
     public void setFlag(Integer flag) {
         this.flag = flag;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 47 * hash + Objects.hashCode(this.codigo);
+        hash = 47 * hash + Objects.hashCode(this.application);
+        hash = 47 * hash + Objects.hashCode(this.hash);
+        hash = 47 * hash + Objects.hashCode(this.date_in);
+        hash = 47 * hash + Objects.hashCode(this.date_out);
+        hash = 47 * hash + Objects.hashCode(this.forever);
+        hash = 47 * hash + Objects.hashCode(this.flag);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Token other = (Token) obj;
+        if (!Objects.equals(this.codigo, other.codigo)) {
+            return false;
+        }
+        if (!Objects.equals(this.hash, other.hash)) {
+            return false;
+        }
+        if (!Objects.equals(this.application, other.application)) {
+            return false;
+        }
+        if (!Objects.equals(this.date_in, other.date_in)) {
+            return false;
+        }
+        if (!Objects.equals(this.date_out, other.date_out)) {
+            return false;
+        }
+        if (!Objects.equals(this.forever, other.forever)) {
+            return false;
+        }
+        if (!Objects.equals(this.flag, other.flag)) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Token{" + "codigo=" + codigo + ", application=" + application + ", hash=" + hash + ", date_in=" + date_in + ", date_out=" + date_out + ", forever=" + forever + ", flag=" + flag + '}';
     }
 
 }
