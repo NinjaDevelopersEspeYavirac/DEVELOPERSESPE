@@ -75,6 +75,17 @@ public class TokenService implements Serializable{
         }
         return find;
     }
+    
+    public Token findByToken(String token) {
+        Token find = new Token();
+        Query<Token> result = this.ds.find(Token.class).
+                field("codigo").equal(token).
+                field("flag").equal(1);
+        if (result.asList() != null && !result.asList().isEmpty()) {
+            find = result.asList().get(0);
+        }
+        return find;
+    }
 
     public Token findById(Integer token) {
         Token find = new Token();
