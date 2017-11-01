@@ -5,47 +5,27 @@
  */
 package ec.edu.espe.developers.espe.mongo.model;
 
+import com.mongodb.BasicDBObject;
+import com.mongodb.DBObject;
 import ec.edu.espe.developers.espe.mongo.model.entity.BaseEntity;
-import org.mongodb.morphia.annotations.Embedded;
-import org.mongodb.morphia.annotations.Entity;
-import org.mongodb.morphia.annotations.Field;
-import org.mongodb.morphia.annotations.Index;
-import org.mongodb.morphia.annotations.IndexOptions;
-import org.mongodb.morphia.annotations.Indexes;
 
-/**
- *
- * @author luis
- */
-@Entity(value = "users")
-@Indexes({
-    @Index(fields = @Field("codigo"), options = @IndexOptions(unique = true)),
-    @Index(fields = @Field("flag"))})
-public class User extends BaseEntity {
+
+
+public final class User extends BaseEntity {
 
     private String codigo;
-
-    @Embedded
-    private Local local;
-
-    @Embedded
-    private Facebook facebook;
-
-    @Embedded
-    private Twitter twitter;
-
-    @Embedded
-    private Google google;
-
     private Boolean admin;
-    
     private Integer flag;
+    
+    private BasicDBObject DBObjectUser= new BasicDBObject();
+
+    public User(String codigo, Boolean admin, Integer flag) {
+        this.setCodigo(codigo);
+        this.setAdmin(admin);
+        this.setFlag(flag);
+    }
 
     public User() {
-        this.local = new Local();
-        this.facebook = new Facebook();
-        this.twitter = new Twitter();
-        this.google = new Google();
         this.admin = Boolean.FALSE;
         this.flag = 0;
        
@@ -57,46 +37,16 @@ public class User extends BaseEntity {
 
     public void setCodigo(String codigo) {
         this.codigo = codigo;
+        this.DBObjectUser.put("Codigo", codigo);
     }
-
-    public Local getLocal() {
-        return local;
-    }
-
-    public void setLocal(Local local) {
-        this.local = local;
-    }
-
-    public Facebook getFacebook() {
-        return facebook;
-    }
-
-    public void setFacebook(Facebook facebook) {
-        this.facebook = facebook;
-    }
-
-    public Twitter getTwitter() {
-        return twitter;
-    }
-
-    public void setTwitter(Twitter twitter) {
-        this.twitter = twitter;
-    }
-
-    public Google getGoogle() {
-        return google;
-    }
-
-    public void setGoogle(Google google) {
-        this.google = google;
-    }
-
+    
     public Boolean getAdmin() {
         return admin;
     }
 
     public void setAdmin(Boolean admin) {
         this.admin = admin;
+        this.DBObjectUser.put("Admin", admin);
     }
 
     public Integer getFlag() {
@@ -105,6 +55,22 @@ public class User extends BaseEntity {
 
     public void setFlag(Integer flag) {
         this.flag = flag;
+        this.DBObjectUser.put("Flag", flag);
+    }
+    
+    public BasicDBObject getDBObjectUser() {
+        return DBObjectUser;
+    }
+
+    public void setDBObjectUser(BasicDBObject DBObjectUser) {
+        this.DBObjectUser = DBObjectUser;
+    }
+
+     public void makePojofromBson(DBObject bson) {
+        BasicDBObject b = (BasicDBObject) bson;
+        this.codigo= (String) b.get("Codigo");
+        this.admin = (Boolean) b.get("Admin");
+        this.flag = (Integer) b.get("Flag");
     }
 
 }

@@ -5,39 +5,37 @@
  */
 package ec.edu.espe.developers.espe.mongo.model;
 
+import com.mongodb.BasicDBObject;
+import com.mongodb.DBObject;
 import ec.edu.espe.developers.espe.mongo.model.entity.BaseEntity;
 import java.util.Date;
-import org.mongodb.morphia.annotations.Entity;
-import org.mongodb.morphia.annotations.Field;
-import org.mongodb.morphia.annotations.Index;
-import org.mongodb.morphia.annotations.IndexOptions;
-import org.mongodb.morphia.annotations.Indexes;
-import org.mongodb.morphia.annotations.Reference;
 
 /**
  *
  * @author F.R.G
  */
-@Entity(value = "audits")
-@Indexes({
-    @Index(fields = @Field("codigo"), options = @IndexOptions(unique = true)),
-    @Index(fields = @Field("flag"))})
-public class Audit extends BaseEntity {
 
+public final class Audit extends BaseEntity {
+
+    private BasicDBObject DBObjectAudit= new BasicDBObject();
+    
     private String codigo;
-
-    @Reference
-    private App application;
-
     private String token;
     private Date date;
     private String search;
     private String ip;
     private Integer flag;
 
-      public Audit() {
-        this.application = new App();
+    public Audit(String codigo, String token, Date date, String search, String ip, Integer flag) {
+        this.setCodigo(codigo);
+        this.setToken(token);
+        this.setDate(date);
+        this.setSearch(search);
+        this.setIp(ip);
+        this.setFlag(flag);
     }
+    
+    
 
     public String getCodigo() {
         return codigo;
@@ -45,14 +43,8 @@ public class Audit extends BaseEntity {
 
     public void setCodigo(String codigo) {
         this.codigo = codigo;
-    }
+        this.DBObjectAudit.put("Codigo", codigo);
 
-    public App getApplication() {
-        return application;
-    }
-
-    public void setApplication(App application) {
-        this.application = application;
     }
 
     public String getToken() {
@@ -61,6 +53,7 @@ public class Audit extends BaseEntity {
 
     public void setToken(String token) {
         this.token = token;
+        this.DBObjectAudit.put("Token", token);
     }
 
     public Date getDate() {
@@ -69,6 +62,7 @@ public class Audit extends BaseEntity {
 
     public void setDate(Date date) {
         this.date = date;
+        this.DBObjectAudit.put("Date", date);
     }
 
     public String getSearch() {
@@ -77,6 +71,7 @@ public class Audit extends BaseEntity {
 
     public void setSearch(String search) {
         this.search = search;
+        this.DBObjectAudit.put("Search", search);
     }
 
     public String getIp() {
@@ -85,6 +80,7 @@ public class Audit extends BaseEntity {
 
     public void setIp(String ip) {
         this.ip = ip;
+        this.DBObjectAudit.put("Ip", ip);
     }
 
     public Integer getFlag() {
@@ -93,6 +89,25 @@ public class Audit extends BaseEntity {
 
     public void setFlag(Integer flag) {
         this.flag = flag;
+        this.DBObjectAudit.put("Flag", flag);
+    }
+    
+     public BasicDBObject getDBObjectAudit() {
+        return DBObjectAudit;
+    }
+
+    public void setDBObjectAudit(BasicDBObject DBObjectAudit) {
+        this.DBObjectAudit = DBObjectAudit;
+    }
+    
+    public void makePojofromBson(DBObject bson) {
+        BasicDBObject b = (BasicDBObject) bson;
+        this.codigo= (String) b.get("Codigo");
+        this.token = (String) b.get("Token");
+        this.date = (Date) b.get("Date");
+        this.search = (String) b.get("Search");
+        this.ip = (String) b.get("Ip");
+        this.flag = (Integer) b.get("Flag");
     }
    
 }

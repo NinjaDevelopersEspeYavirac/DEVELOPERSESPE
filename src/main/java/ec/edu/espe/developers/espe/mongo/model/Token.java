@@ -5,36 +5,32 @@
  */
 package ec.edu.espe.developers.espe.mongo.model;
 
+import com.mongodb.BasicDBObject;
+import com.mongodb.DBObject;
 import ec.edu.espe.developers.espe.mongo.model.entity.BaseEntity;
 import java.util.Date;
 import java.util.Objects;
-import org.mongodb.morphia.annotations.Entity;
-import org.mongodb.morphia.annotations.Field;
-import org.mongodb.morphia.annotations.Index;
-import org.mongodb.morphia.annotations.IndexOptions;
-import org.mongodb.morphia.annotations.Indexes;
-import org.mongodb.morphia.annotations.Reference;
 
-/**
- *
- * @author luis
- */
-@Entity(value = "tokens")
-@Indexes({
-    @Index(fields = @Field("codigo"), options = @IndexOptions(unique = true)),
-    @Index(fields = @Field("flag"))})
-public class Token extends BaseEntity {
+
+public final class Token extends BaseEntity {
 
     private String codigo;
-
-    @Reference
-    private App application;
-
     private String hash;
     private Date date_in;
     private Date date_out;
     private Boolean forever;
     private Integer flag;
+    
+    private BasicDBObject DBObjectToken= new BasicDBObject();
+
+    public Token(String codigo, String hash, Date date_in, Date date_out, Boolean forever, Integer flag) {
+        this.setCodigo(codigo);
+        this.setHash(hash);
+        this.setDate_in(date_in);
+        this.setDate_out(date_out);
+        this.setForever(forever);
+        this.setFlag(flag);
+    }
 
     public Token() {
         this.forever = Boolean.FALSE;
@@ -47,6 +43,7 @@ public class Token extends BaseEntity {
 
     public void setHash(String hash) {
         this.hash = hash;
+        this.DBObjectToken.put("Hash", hash);
     }
 
     public Date getDate_in() {
@@ -55,6 +52,7 @@ public class Token extends BaseEntity {
 
     public void setDate_in(Date date_in) {
         this.date_in = date_in;
+        this.DBObjectToken.put("Date_in", date_in);
     }
 
     public Date getDate_out() {
@@ -63,6 +61,7 @@ public class Token extends BaseEntity {
 
     public void setDate_out(Date date_out) {
         this.date_out = date_out;
+        this.DBObjectToken.put("Date_out", date_out);
     }
 
     public Boolean getForever() {
@@ -71,6 +70,7 @@ public class Token extends BaseEntity {
 
     public void setForever(Boolean forever) {
         this.forever = forever;
+        this.DBObjectToken.put("Forever", forever);
     }
 
     public String getCodigo() {
@@ -79,14 +79,7 @@ public class Token extends BaseEntity {
 
     public void setCodigo(String codigo) {
         this.codigo = codigo;
-    }
-
-    public App getApplication() {
-        return application;
-    }
-
-    public void setApplication(App application) {
-        this.application = application;
+        this.DBObjectToken.put("Codigo", codigo);
     }
 
     public Integer getFlag() {
@@ -95,13 +88,13 @@ public class Token extends BaseEntity {
 
     public void setFlag(Integer flag) {
         this.flag = flag;
+        this.DBObjectToken.put("Flag", flag);
     }
 
     @Override
     public int hashCode() {
         int hash = 7;
         hash = 47 * hash + Objects.hashCode(this.codigo);
-        hash = 47 * hash + Objects.hashCode(this.application);
         hash = 47 * hash + Objects.hashCode(this.hash);
         hash = 47 * hash + Objects.hashCode(this.date_in);
         hash = 47 * hash + Objects.hashCode(this.date_out);
@@ -128,9 +121,6 @@ public class Token extends BaseEntity {
         if (!Objects.equals(this.hash, other.hash)) {
             return false;
         }
-        if (!Objects.equals(this.application, other.application)) {
-            return false;
-        }
         if (!Objects.equals(this.date_in, other.date_in)) {
             return false;
         }
@@ -145,10 +135,27 @@ public class Token extends BaseEntity {
         }
         return true;
     }
+    
+    public BasicDBObject getDBObjectToken() {
+        return DBObjectToken;
+    }
 
+    public void setDBObjectToken(BasicDBObject DBObjectToken) {
+        this.DBObjectToken = DBObjectToken;
+    }
+
+     public void makePojofromBson(DBObject bson) {
+        BasicDBObject b = (BasicDBObject) bson;
+        this.codigo= (String) b.get("Codigo");
+        this.hash = (String) b.get("Hash");
+        this.date_in = (Date) b.get("Date_in");
+        this.date_out = (Date) b.get("Date_out");
+        this.forever = (Boolean) b.get("Forever");
+        this.flag = (Integer) b.get("Flag");
+    }
     @Override
     public String toString() {
-        return "Token{" + "codigo=" + codigo + ", application=" + application + ", hash=" + hash + ", date_in=" + date_in + ", date_out=" + date_out + ", forever=" + forever + ", flag=" + flag + '}';
+        return "Token{" + "codigo=" + codigo + ", hash=" + hash + ", date_in=" + date_in + ", date_out=" + date_out + ", forever=" + forever + ", flag=" + flag + '}';
     }
 
 }

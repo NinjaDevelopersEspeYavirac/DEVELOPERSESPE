@@ -8,28 +8,14 @@ package ec.edu.espe.developers.espe.mongo.model;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
 import ec.edu.espe.developers.espe.mongo.model.entity.BaseEntity;
-import org.mongodb.morphia.annotations.Entity;
-import org.mongodb.morphia.annotations.Field;
-import org.mongodb.morphia.annotations.Index;
-import org.mongodb.morphia.annotations.IndexOptions;
-import org.mongodb.morphia.annotations.Indexes;
-import org.mongodb.morphia.annotations.Reference;
 
 /**
  *
  * @author luis
  */
-@Entity(value = "apps")
-@Indexes({
-    @Index(fields = @Field("codigo"), options = @IndexOptions(unique = true)),
-    @Index(fields = @Field("flag"))})
 public final class App extends BaseEntity {
 
     private String codigo;
-
-    @Reference
-    private User developer;
-
     private String name;
     private String description;
     private String client_id;
@@ -38,9 +24,8 @@ public final class App extends BaseEntity {
     
     private BasicDBObject DBObjectApp = new BasicDBObject();
 
-    public App(String codigo, User developer, String name, String description, String client_id, String client_secret, Integer flag) {
+    public App(String codigo, String name, String description, String client_id, String client_secret, Integer flag) {
         this.setCodigo(codigo);
-        this.setDeveloper(developer);
         this.setName(name);
         this.setDescription(description);
         this.setClient_id(client_id);
@@ -59,15 +44,6 @@ public final class App extends BaseEntity {
     public void setCodigo(String codigo) {
         this.codigo = codigo;
         this.DBObjectApp.put("Codigo", codigo);
-    }
-
-    public User getDeveloper() {
-        return developer;
-    }
-
-    public void setDeveloper(User developer) {
-        this.developer = developer;
-        this.DBObjectApp.put("Developer", developer);
     }
 
     public String getName() {

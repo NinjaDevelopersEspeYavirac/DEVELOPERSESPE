@@ -5,18 +5,24 @@
  */
 package ec.edu.espe.developers.espe.mongo.model;
 
-import org.mongodb.morphia.annotations.Embedded;
+import com.mongodb.BasicDBObject;
+import com.mongodb.DBObject;
 
-/**
- *
- * @author luis
- */
-@Embedded
-public class Local {
 
+public final class Local {
+    
     private String id;
     private String name;
     private String password;
+
+    private BasicDBObject DBObjectLocal= new BasicDBObject();
+    
+    public Local(String id, String name, String password) {
+        this.setId(id);
+        this.setName(name);
+        this.setPassword(password);
+    }
+
 
     public Local() {
         this.id = "";
@@ -30,9 +36,8 @@ public class Local {
 
     public void setId(String id) {
         this.id = id;
+        this.DBObjectLocal.put("Id", id);
     }
-
-
 
     public String getName() {
         return name;
@@ -40,6 +45,7 @@ public class Local {
 
     public void setName(String name) {
         this.name = name;
+        this.DBObjectLocal.put("Name", name);
     }
 
     public String getPassword() {
@@ -48,5 +54,21 @@ public class Local {
 
     public void setPassword(String password) {
         this.password = password;
+        this.DBObjectLocal.put("Password", password);
+    }
+    
+    public BasicDBObject getDBObjectLocal() {
+        return DBObjectLocal;
+    }
+
+    public void setDBObjectLocal(BasicDBObject DBObjectLocal) {
+        this.DBObjectLocal = DBObjectLocal;
+    }
+    
+    public void makePojofromBson(DBObject bson) {
+        BasicDBObject b = (BasicDBObject) bson;
+        this.id= (String) b.get("Id");
+        this.name = (String) b.get("Name");
+        this.password = (String) b.get("Password");
     }
 }
